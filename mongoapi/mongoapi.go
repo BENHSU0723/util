@@ -89,7 +89,8 @@ func getOrigData(collection *mongo.Collection, filter bson.M, argOpt ...interfac
 	return result, nil
 }
 
-func PureCheckDataExisted(collection *mongo.Collection, filter bson.M, argOpt ...interface{}) (bool, error) {
+func PureCheckDataExisted(collName string, filter bson.M, argOpt ...interface{}) (bool, error) {
+	collection := Client.Database(dbName).Collection(collName)
 	result, err := findOneAndDecode(collection, filter, argOpt...)
 	if err != nil {
 		return false, err
